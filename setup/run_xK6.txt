@@ -1,0 +1,4 @@
+k6 run --out dashboard=open script.js
+
+// save report.html
+k6 run --out dashboard=report=test-report.html script.js

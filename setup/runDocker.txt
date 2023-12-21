@@ -1,0 +1,7 @@
+docker compose up --detach OR 
+docker compose up -d
+
+docker compose run --rm k6 run /scripts/getScript.js
+
+// run grafana k6 cloud
+docker-compose run --rm -i k6 cloud /scripts/getScript.js

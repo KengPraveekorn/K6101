@@ -1,0 +1,8 @@
+services:
+  k6:
+    image: grafana/k6:latest
+    # command: cloud /scripts/getScript.js
+    volumes:
+      - ./k6-scripts:/scripts
+    environment:
+      - K6_CLOUD_TOKEN=4ba7fb052b995f4b1bfbe8702e73a6da6746ff4fb86582b76a85d43b3535903a

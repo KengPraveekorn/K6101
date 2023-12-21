@@ -1,0 +1,4 @@
+k6 run script.js
+
+// save file csv
+k6 run --out csv=test_results.csv script.js
