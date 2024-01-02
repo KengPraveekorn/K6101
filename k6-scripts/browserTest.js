@@ -7,7 +7,7 @@ export const options = {
       options: {
         browser: {
           type: "chromium",
-          // headless: false,
+          headless: false,
         },
       },
     },

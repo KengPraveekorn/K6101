@@ -7,11 +7,12 @@ import { jUnit } from "https://jslib.k6.io/k6-summary/0.0.2/index.js";
 
 
 // const myTrend = new Trend('my_trend');
-const url = 'https://pokeapi.co/api/v2/ability/1'
+// const url = 'https://pokeapi.co/api/v2/ability/1'
+const zeebe = 'https://localhost:26500'
 
 export const options = {
   vus: 100, // Virtual users
-  duration: "10s",
+  // duration: "60s",
   // thresholds: {
   //   http_req_duration: ["p(95)<200"], // 95% of requests should be below 200ms
   // },
@@ -26,8 +27,7 @@ export const options = {
 // };
 
 export default () => {
-  // 'https://httpbin.test.k6.io/'
-  const res = http.get(url);
+  const res = http.get(zeebe);
   check(res, {
     "status was 200": (r) => r.status == 200,
     // "body size is 30,000 bytes": (r) => r.body.length == 30000,
