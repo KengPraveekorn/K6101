@@ -19,15 +19,19 @@ export const options = {
     http_req_failed: ["rate<0.03"], // http errors should be less than 1%
     // http_req_duration: ["p(95)<500"], // 95% of requests must complete below 500ms
   },
-  vus:300, // Virtual users
-  duration: "60s",
+  // vus:200, // Virtual users
+  // duration: "30s",
 
-  // stages: [
-  //   { duration: "1s", target: 10 },
-  //   { duration: "5s", target: 100 },
-  //   { duration: "10s", target: 100 },
-  //   { duration: "15s", target: 0 },
-  // ]
+  stages: [
+    { duration: "10s", target: 50 },
+    { duration: "10s", target: 100 },
+    { duration: "10s", target: 150 },
+    { duration: "10s", target: 200 },
+    { duration: "10s", target: 250 },
+    { duration: "10s", target: 300 },
+    { duration: "30s", target: 500 },
+    // { duration: "1m", target: 250 },
+  ]
 
 };
 
