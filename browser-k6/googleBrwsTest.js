@@ -1,5 +1,5 @@
 import { browser } from "k6/experimental/browser";
-import { check } from "k6";
+import { check, sleep } from "k6";
 
 const url = "https://www.google.com/";
 
@@ -7,15 +7,17 @@ export const options = {
   scenarios: {
     ui: {
       executor: "shared-iterations",
+      // executor: "constant-vus",
+      vus: 1,
+      // duration: "40s",
+      iterations: 1,
       options: {
         browser: {
           type: "chromium",
           headless: false,
         },
       },
-      vus: 3,
-      //   duration: "5m",
-      iterations: 10,
+      
       //   maxDuration: "10s",
     },
   },
@@ -31,24 +33,25 @@ export default async () => {
     await page.goto(url);
     page.locator('textarea[name="q"]').type("K6");
 
-    // const submitButton = page.locator('input[type="submit"]');
-    // await Promise.all([page.waitForNavigation(), submitButton.click()]);
-
     page.keyboard.press("Enter");
 
+    // await page.waitForNavigation(),
+    page.screenshot({ path: "screenshots/screenshot.png" }),
+    
     // await Promise.all([
     //   page.waitForNavigation(),
     //   page.screenshot({ path: "screenshots/screenshot.png" }),
     // ])
 
-    // check(page, {
-    //   header: (p) =>
-    //     p.locator("h3").textContent() ==
-    //     "Grafana k6: Load testing for engineering teams",
-    // });
-  } catch (err) {
-    console.error(err);
-  } finally {
+    check(page, {
+      header: (p) =>
+        p.locator('#rso > div.hlcw0c > div > div > div > div > div > div > div > div.yuRUbf > div > span > a > h3').textContent() ===
+        "Grafana k6: Load testing for engineering teams",
+    });
+
+    sleep(1);
+
+  }finally {
     page.close();
   }
 };
