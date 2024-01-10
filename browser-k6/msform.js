@@ -5,13 +5,19 @@ import http from "k6/http";
 export const options = {
   scenarios: {
     browser: {
-      // executor: "constant-vus",
-      // executor: "ramping-vus",
-      executor: "per-vu-iterations",
+      options: {
+        browser: {
+          type: "chromium",
+          headless: false,
+        },
+      },
       exec: "browserTest",
-      // vus: 5,
+
+      // executor: "constant-vus",
+      // vus: 10,
       // duration: "30s",
 
+      // executor: "ramping-vus",
       // startVUs: 0,
       // stages: [
       //   // { duration: "10s", target: 3 },
@@ -20,22 +26,16 @@ export const options = {
       // ],
       // gracefulRampDown: '0s',
 
-      // vus: 1,
-      // iterations: 5,
-
-      options: {
-        browser: {
-          type: "chromium",
-          headless: false,
-        },
-      },
+      executor: "per-vu-iterations",
+      vus: 1,
+      iterations: 10,
     },
-    ui: {
-      executor: 'constant-vus',
-      exec: 'protocolTest',
-      vus: 20,
-      duration: '30s',
-    }
+    // ui: {
+    //   executor: 'constant-vus',
+    //   exec: 'protocolTest',
+    //   vus: 20,
+    //   duration: '30s',
+    // }
   },
 };
 
@@ -85,11 +85,11 @@ export async function browserTest() {
   }
 }
 
-export function protocolTest() {
-  const res = http.get('https://forms.office.com/r/ZAqdgQ3SbY?origin=lprLink');
+// export function protocolTest() {
+//   const res = http.get('https://forms.office.com/r/ZAqdgQ3SbY?origin=lprLink');
 
-  check(res, {
-    'status is 200': (r) => r.status === 200,
-  });
+//   check(res, {
+//     'status is 200': (r) => r.status === 200,
+//   });
 
-}
+// }
