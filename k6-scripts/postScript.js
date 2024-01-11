@@ -19,24 +19,24 @@ export const options = {
     http_req_failed: ["rate<0.03"], // http errors should be less than 1%
     // http_req_duration: ["p(95)<500"], // 95% of requests must complete below 500ms
   },
-  // vus:200, // Virtual users
-  // duration: "30s",
+  // vus:300, // Virtual users
+  // duration: "10s",
 
   stages: [
-    { duration: "10s", target: 50 },
     { duration: "10s", target: 100 },
-    { duration: "10s", target: 150 },
     { duration: "10s", target: 200 },
-    { duration: "10s", target: 250 },
-    // { duration: "10s", target: 300 },
-    // { duration: "10s", target: 350 },
-    // { duration: "30s", target: 250 },
+    { duration: "10s", target: 300 },
+    { duration: "10s", target: 400 },
+    { duration: "10s", target: 500 },
+    { duration: "10s", target: 1000 },
+    { duration: "30s", target: 500 },
   ]
 
 };
 
 export default () => {
   const startflow = "http://localhost:8080/api/runprocess/startflow";
+  // const startflow = "https://eat-api-copdev.allcorporate.net/runprocess/startflow";
   const payload = JSON.stringify({
     bpmnProcessId: "Process_0ex5r33",
     variables: {
